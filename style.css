@@ -63,6 +63,70 @@ header {
 }
 
 /* ════════════════════════════════════════
+   LED STRIP
+════════════════════════════════════════ */
+.led-strip {
+  position: absolute; inset: 0; border-radius: 20px;
+  pointer-events: none; z-index: 0;
+  border: 1.5px solid rgba(30, 60, 30, 0.12);
+  box-shadow:
+    inset 0 0 6px rgba(40, 180, 40, 0);
+  transition: border-color 0.5s, box-shadow 0.5s;
+}
+
+/* segmented LED dots along top and bottom edges */
+.led-strip::before,
+.led-strip::after {
+  content: '';
+  position: absolute; left: 16px; right: 16px; height: 2px;
+  border-radius: 1px;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(40, 220, 40, 0) 0px,   rgba(40, 220, 40, 0) 4px,
+    rgba(40, 220, 40, 0.06) 4px, rgba(40, 220, 40, 0.06) 6px
+  );
+  transition: background 0.5s, filter 0.5s;
+}
+.led-strip::before { top: 2px; }
+.led-strip::after  { bottom: 2px; }
+
+#card-toggle.is-on .led-strip {
+  border-color: rgba(40, 200, 40, 0.45);
+  box-shadow:
+    0 0 8px  rgba(40, 200, 40, 0.35),
+    0 0 20px rgba(40, 200, 40, 0.18),
+    0 0 48px rgba(40, 200, 40, 0.09),
+    inset 0 0 16px rgba(40, 200, 40, 0.06);
+  animation: ledBreath 2.8s ease-in-out infinite;
+}
+#card-toggle.is-on .led-strip::before,
+#card-toggle.is-on .led-strip::after {
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(40, 240, 40, 0) 0px,   rgba(40, 240, 40, 0) 4px,
+    rgba(40, 240, 40, 0.8) 4px, rgba(40, 240, 40, 0.8) 6px
+  );
+  filter: blur(0.5px) drop-shadow(0 0 3px rgba(40, 240, 40, 0.9));
+  animation: ledChase 0.8s linear infinite;
+}
+#card-toggle.is-on .led-strip::after {
+  animation-direction: reverse;
+}
+
+@keyframes ledBreath {
+  0%, 100% {
+    box-shadow: 0 0 8px rgba(40,200,40,0.35), 0 0 20px rgba(40,200,40,0.18), 0 0 48px rgba(40,200,40,0.09), inset 0 0 16px rgba(40,200,40,0.06);
+  }
+  50% {
+    box-shadow: 0 0 14px rgba(40,200,40,0.55), 0 0 32px rgba(40,200,40,0.28), 0 0 70px rgba(40,200,40,0.14), inset 0 0 24px rgba(40,200,40,0.1);
+  }
+}
+@keyframes ledChase {
+  from { background-position: 0 0; }
+  to   { background-position: 10px 0; }
+}
+
+/* ════════════════════════════════════════
    1. TOGGLE
 ════════════════════════════════════════ */
 .toggle-housing { position: relative; padding-bottom: 8px; }
@@ -216,10 +280,13 @@ header {
 }
 
 .squeeze-shadow {
-  position: absolute; bottom: 0; left: 50%; transform: translateX(-50%) scaleX(0.7) scaleY(0.3);
+  position: absolute; bottom: 0; left: 50%;
+  transform: translateX(-50%) scaleX(0.7) scaleY(0.3);
+  transform-origin: center bottom;
   width: 110px; height: 30px;
   background: radial-gradient(ellipse, rgba(0,0,0,0.6) 0%, transparent 70%);
   pointer-events: none;
+  transition: opacity 0.1s;
 }
 
 .squeeze-hint { font-size: 0.55rem; letter-spacing: 0.25em; color: #333; text-transform: uppercase; }

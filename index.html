@@ -7,15 +7,19 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="bg-texture"></div>
   <header>
-    <h1 class="logo">FIDGET<span>LAB</span></h1>
-    <p class="tagline">the ultimate browser fidget collection</p>
+    <div class="header-inner">
+      <h1 class="logo">FIDGET<span>LAB</span></h1>
+      <div class="logo-rule"><span></span></div>
+      <p class="tagline">the ultimate browser fidget collection</p>
+    </div>
   </header>
+
   <main class="fidget-grid">
 
     <!-- 1. TOGGLE -->
     <div class="fidget-card" id="card-toggle">
+      <div class="led-strip"></div>
       <div class="card-label">TOGGLE</div>
       <div class="toggle-housing">
         <div class="toggle-track" id="toggleTrack">
@@ -45,58 +49,60 @@
       <div class="card-label">CLICKER</div>
       <div class="clicker-wrap">
         <div class="clicker-btn" id="clickerBtn">
-          <div class="clicker-face">
-            <div class="clicker-ridge"></div>
-            <div class="clicker-ridge"></div>
-            <div class="clicker-ridge"></div>
+          <div class="clicker-rim">
+            <div class="clicker-face">
+              <div class="clicker-ridge"></div>
+              <div class="clicker-ridge"></div>
+              <div class="clicker-ridge"></div>
+            </div>
           </div>
         </div>
         <div class="clicker-shadow"></div>
       </div>
-      <div class="clicker-count" id="clickerCount">
-        <span class="count-digit" id="countDigit">0</span>
+      <div class="clicker-readout">
+        <div class="readout-screen">
+          <span class="count-digit" id="countDigit">0</span>
+        </div>
       </div>
     </div>
 
     <!-- 3. SQUEEZE BALL -->
     <div class="fidget-card" id="card-squeeze">
       <div class="card-label">SQUEEZE</div>
-      <div class="squeeze-wrap">
-        <div class="squeeze-ball" id="squeezeBall">
-          <div class="squeeze-shine"></div>
-          <div class="squeeze-gloss"></div>
+      <div class="squeeze-scene">
+        <div class="squeeze-wrap">
+          <div class="squeeze-ball" id="squeezeBall">
+            <div class="squeeze-shine-1"></div>
+            <div class="squeeze-shine-2"></div>
+          </div>
         </div>
         <div class="squeeze-shadow" id="squeezeShadow"></div>
       </div>
-      <div class="squeeze-hint">hold to squeeze</div>
+      <div class="squeeze-hint">press and hold</div>
     </div>
 
     <!-- 4. DIAL -->
     <div class="fidget-card" id="card-dial">
       <div class="card-label">DIAL</div>
       <div class="dial-housing">
+        <div class="dial-ring"></div>
         <div class="dial-marks">
-          <div class="dial-mark" style="--a:0deg"></div>
-          <div class="dial-mark" style="--a:30deg"></div>
-          <div class="dial-mark" style="--a:60deg"></div>
-          <div class="dial-mark" style="--a:90deg"></div>
-          <div class="dial-mark" style="--a:120deg"></div>
-          <div class="dial-mark" style="--a:150deg"></div>
-          <div class="dial-mark" style="--a:180deg"></div>
-          <div class="dial-mark" style="--a:210deg"></div>
-          <div class="dial-mark" style="--a:240deg"></div>
-          <div class="dial-mark" style="--a:270deg"></div>
-          <div class="dial-mark" style="--a:300deg"></div>
-          <div class="dial-mark" style="--a:330deg"></div>
+          <!-- 270° arc: from 225° to 135° clockwise (gap at bottom) -->
+          <div class="dial-mark dm-minor" style="--a:225deg"></div>
+          <div class="dial-mark dm-minor" style="--a:255deg"></div>
+          <div class="dial-mark dm-major" style="--a:270deg"></div>
+          <div class="dial-mark dm-minor" style="--a:285deg"></div>
+          <div class="dial-mark dm-minor" style="--a:315deg"></div>
+          <div class="dial-mark dm-major" style="--a:0deg"></div>
+          <div class="dial-mark dm-minor" style="--a:45deg"></div>
+          <div class="dial-mark dm-minor" style="--a:75deg"></div>
+          <div class="dial-mark dm-major" style="--a:90deg"></div>
+          <div class="dial-mark dm-minor" style="--a:105deg"></div>
+          <div class="dial-mark dm-minor" style="--a:135deg"></div>
         </div>
         <div class="dial-knob" id="dialKnob">
           <div class="dial-face">
             <div class="dial-indicator"></div>
-            <div class="dial-grip"></div>
-            <div class="dial-grip"></div>
-            <div class="dial-grip"></div>
-            <div class="dial-grip"></div>
-            <div class="dial-grip"></div>
           </div>
         </div>
       </div>
@@ -105,7 +111,7 @@
 
     <!-- 5. SLIDER -->
     <div class="fidget-card" id="card-slider">
-      <div class="card-label">SLIDER</div>
+      <div class="card-label">FADER</div>
       <div class="slider-housing">
         <div class="slider-track-wrap">
           <div class="slider-track" id="sliderTrack">
@@ -124,10 +130,12 @@
               <div class="slider-notch"></div>
             </div>
             <div class="slider-thumb" id="sliderThumb">
-              <div class="slider-thumb-face">
-                <div class="slider-thumb-line"></div>
-                <div class="slider-thumb-line"></div>
-                <div class="slider-thumb-line"></div>
+              <div class="fader-cap">
+                <div class="fader-line"></div>
+                <div class="fader-line"></div>
+                <div class="fader-mark"></div>
+                <div class="fader-line"></div>
+                <div class="fader-line"></div>
               </div>
             </div>
           </div>
