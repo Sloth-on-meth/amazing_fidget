@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Amazing Fidget</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="bg-texture"></div>
+
+  <header>
+    <h1 class="logo">FIDGET<span>LAB</span></h1>
+    <p class="tagline">the ultimate browser fidget collection</p>
+  </header>
+
+  <main class="fidget-grid">
+
+    <!-- THE TOGGLE SWITCH -->
+    <div class="fidget-card unlocked" id="card-toggle">
+      <div class="card-label">TOGGLE</div>
+      <div class="toggle-housing">
+        <div class="toggle-track" id="toggleTrack">
+          <div class="toggle-groove">
+            <div class="groove-line"></div>
+            <div class="groove-line"></div>
+            <div class="groove-line"></div>
+          </div>
+          <div class="toggle-thumb" id="toggleThumb">
+            <div class="thumb-face">
+              <div class="thumb-ridge"></div>
+              <div class="thumb-ridge"></div>
+              <div class="thumb-ridge"></div>
+              <div class="thumb-dot"></div>
+            </div>
+          </div>
+          <div class="toggle-label off-label">OFF</div>
+          <div class="toggle-label on-label">ON</div>
+        </div>
+        <div class="toggle-shadow"></div>
+      </div>
+      <div class="click-count" id="clickCount">clicks: 0</div>
+    </div>
+
+    <!-- LOCKED SLOTS -->
+    <div class="fidget-card locked" id="card-2">
+      <div class="lock-icon">🔒</div>
+      <div class="card-label">???</div>
+      <div class="unlock-hint">10 clicks to unlock</div>
+    </div>
+
+    <div class="fidget-card locked" id="card-3">
+      <div class="lock-icon">🔒</div>
+      <div class="card-label">???</div>
+      <div class="unlock-hint">50 clicks to unlock</div>
+    </div>
+
+    <div class="fidget-card locked" id="card-4">
+      <div class="lock-icon">🔒</div>
+      <div class="card-label">???</div>
+      <div class="unlock-hint">100 clicks to unlock</div>
+    </div>
+
+  </main>
+
+  <script src="fidget.js"></script>
+</body>
+</html>

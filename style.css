@@ -1,0 +1,349 @@
+/* ─── RESET ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ─── PLASTIC BACKGROUND ─── */
+body {
+  min-height: 100vh;
+  background-color: #1a1a1a;
+  color: #ccc;
+  font-family: 'Courier New', monospace;
+  overflow-x: hidden;
+  position: relative;
+}
+
+.bg-texture {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    /* fine grain noise */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E"),
+    /* subtle crosshatch */
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 2px,
+      rgba(255,255,255,0.015) 2px,
+      rgba(255,255,255,0.015) 3px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 2px,
+      rgba(255,255,255,0.015) 2px,
+      rgba(255,255,255,0.015) 3px
+    ),
+    /* base gradient */
+    radial-gradient(ellipse at 30% 20%, #2a2a2a 0%, #141414 60%, #0e0e0e 100%);
+  background-size: 300px 300px, 6px 6px, 6px 6px, 100% 100%;
+}
+
+/* ─── HEADER ─── */
+header {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 2.5rem 1rem 1rem;
+}
+
+.logo {
+  font-size: 3rem;
+  font-weight: 900;
+  letter-spacing: 0.25em;
+  color: #888;
+  text-transform: uppercase;
+  text-shadow:
+    0 1px 0 #333,
+    0 2px 0 #2a2a2a,
+    0 3px 6px rgba(0,0,0,0.8);
+}
+
+.logo span {
+  color: #b0b0b0;
+}
+
+.tagline {
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  color: #555;
+  text-transform: uppercase;
+  margin-top: 0.5rem;
+}
+
+/* ─── GRID ─── */
+.fidget-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 3rem auto;
+  padding: 0 2rem;
+}
+
+/* ─── CARDS ─── */
+.fidget-card {
+  background: linear-gradient(145deg, #2a2a2a 0%, #1e1e1e 50%, #181818 100%);
+  border-radius: 16px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  border: 1px solid #333;
+  box-shadow:
+    0 8px 32px rgba(0,0,0,0.6),
+    0 2px 4px rgba(0,0,0,0.4),
+    inset 0 1px 0 rgba(255,255,255,0.06),
+    inset 0 -1px 0 rgba(0,0,0,0.4);
+  position: relative;
+  overflow: hidden;
+  min-height: 300px;
+  justify-content: center;
+}
+
+.fidget-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+}
+
+.card-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.35em;
+  color: #555;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+/* ─── LOCKED CARDS ─── */
+.fidget-card.locked {
+  cursor: default;
+  opacity: 0.5;
+}
+
+.lock-icon {
+  font-size: 2.5rem;
+  filter: grayscale(1);
+}
+
+.unlock-hint {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  color: #444;
+  text-transform: uppercase;
+}
+
+/* ─── TOGGLE HOUSING ─── */
+.toggle-housing {
+  position: relative;
+  padding-bottom: 6px;
+}
+
+/* ─── TOGGLE TRACK ─── */
+.toggle-track {
+  position: relative;
+  width: 180px;
+  height: 80px;
+  background: linear-gradient(180deg, #111 0%, #1c1c1c 40%, #222 100%);
+  border-radius: 40px;
+  cursor: pointer;
+  border: 2px solid #111;
+  box-shadow:
+    inset 0 4px 12px rgba(0,0,0,0.9),
+    inset 0 1px 3px rgba(0,0,0,0.6),
+    0 1px 0 rgba(255,255,255,0.06);
+  transition: background 0.15s ease;
+  user-select: none;
+  -webkit-user-select: none;
+  overflow: visible;
+}
+
+.toggle-track.is-on {
+  background: linear-gradient(180deg, #0a1a0a 0%, #0d2010 40%, #0f2612 100%);
+}
+
+/* groove lines inside the track for texture */
+.toggle-groove {
+  position: absolute;
+  inset: 0;
+  border-radius: 40px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.groove-line {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 2px;
+  background: rgba(0,0,0,0.4);
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+}
+
+.groove-line:nth-child(1) { width: 60%; left: 20%; top: 38%; }
+.groove-line:nth-child(2) { width: 70%; left: 15%; top: 50%; }
+.groove-line:nth-child(3) { width: 60%; left: 20%; top: 62%; }
+
+/* OFF / ON labels */
+.toggle-label {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.6rem;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+
+.off-label {
+  right: 14px;
+  color: #444;
+}
+
+.on-label {
+  left: 14px;
+  color: #2a6e2a;
+  opacity: 0;
+}
+
+.toggle-track.is-on .off-label { opacity: 0; }
+.toggle-track.is-on .on-label  { opacity: 1; }
+
+/* ─── THUMB ─── */
+.toggle-thumb {
+  position: absolute;
+  top: 50%;
+  left: 6px;
+  transform: translateY(-50%);
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  transition: left 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+  will-change: left;
+  z-index: 2;
+}
+
+.toggle-track.is-on .toggle-thumb {
+  left: calc(180px - 66px - 6px);
+}
+
+/* Thumb layered construction for a 3D plastic look */
+.thumb-face {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #5a5a5a 0%, #3a3a3a 35%, #2a2a2a 65%, #1e1e1e 100%);
+  border: 2px solid #111;
+  box-shadow:
+    /* hard drop shadow */
+    0 6px 16px rgba(0,0,0,0.9),
+    0 2px 4px rgba(0,0,0,0.7),
+    /* rim light top */
+    inset 0 2px 3px rgba(255,255,255,0.18),
+    /* inner shadow bottom */
+    inset 0 -3px 6px rgba(0,0,0,0.5),
+    /* ambient outer glow when on */
+    0 0 0 0px rgba(40,180,40,0);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  transition:
+    background 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.toggle-track.is-on .thumb-face {
+  background: radial-gradient(circle at 35% 30%, #5a6e5a 0%, #3a4e3a 35%, #2a3e2a 65%, #1e2e1e 100%);
+  box-shadow:
+    0 6px 16px rgba(0,0,0,0.9),
+    0 2px 4px rgba(0,0,0,0.7),
+    inset 0 2px 3px rgba(255,255,255,0.18),
+    inset 0 -3px 6px rgba(0,0,0,0.5),
+    /* green glow ring when on */
+    0 0 0 3px rgba(40,180,40,0.15),
+    0 0 18px rgba(40,200,40,0.12);
+}
+
+/* ridges on the thumb for grip texture */
+.thumb-ridge {
+  width: 28px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+  border-radius: 1px;
+}
+
+.thumb-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #555, #1a1a1a);
+  box-shadow:
+    inset 0 1px 2px rgba(0,0,0,0.8),
+    0 1px 1px rgba(255,255,255,0.06);
+  margin-top: 2px;
+}
+
+.toggle-track.is-on .thumb-dot {
+  background: radial-gradient(circle at 35% 35%, #4a8a4a, #1a2e1a);
+  box-shadow:
+    inset 0 1px 2px rgba(0,0,0,0.8),
+    0 0 6px rgba(40,200,40,0.4);
+}
+
+/* ─── SHADOW BENEATH HOUSING ─── */
+.toggle-shadow {
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 160px;
+  height: 12px;
+  background: radial-gradient(ellipse, rgba(0,0,0,0.5) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ─── CLICK COUNTER ─── */
+.click-count {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  color: #444;
+  text-transform: uppercase;
+  transition: color 0.3s;
+}
+
+/* ─── PRESS ANIMATION ─── */
+@keyframes thumbPress {
+  0%   { transform: translateY(-50%) scale(1); }
+  40%  { transform: translateY(-50%) scale(0.91); }
+  100% { transform: translateY(-50%) scale(1); }
+}
+
+.toggle-thumb.pressing {
+  animation: thumbPress 0.18s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* ─── UNLOCK FLASH ─── */
+@keyframes unlockFlash {
+  0%   { box-shadow: 0 8px 32px rgba(0,0,0,0.6), 0 0 0 0px rgba(255,200,50,0); }
+  40%  { box-shadow: 0 8px 32px rgba(0,0,0,0.6), 0 0 40px 8px rgba(255,200,50,0.35); }
+  100% { box-shadow: 0 8px 32px rgba(0,0,0,0.6), 0 0 0 0px rgba(255,200,50,0); }
+}
+
+.fidget-card.unlocking {
+  animation: unlockFlash 0.7s ease forwards;
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 600px) {
+  .fidget-grid { grid-template-columns: 1fr; padding: 0 1rem; }
+  .logo { font-size: 2rem; }
+}
