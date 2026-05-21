@@ -3,21 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Amazing Fidget</title>
+  <title>FidgetLab</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="bg-texture"></div>
-
   <header>
     <h1 class="logo">FIDGET<span>LAB</span></h1>
     <p class="tagline">the ultimate browser fidget collection</p>
   </header>
-
   <main class="fidget-grid">
 
-    <!-- THE TOGGLE SWITCH -->
-    <div class="fidget-card unlocked" id="card-toggle">
+    <!-- 1. TOGGLE -->
+    <div class="fidget-card" id="card-toggle">
       <div class="card-label">TOGGLE</div>
       <div class="toggle-housing">
         <div class="toggle-track" id="toggleTrack">
@@ -42,27 +40,106 @@
       <div class="click-count" id="clickCount">clicks: 0</div>
     </div>
 
-    <!-- LOCKED SLOTS -->
-    <div class="fidget-card locked" id="card-2">
-      <div class="lock-icon">🔒</div>
-      <div class="card-label">???</div>
-      <div class="unlock-hint">10 clicks to unlock</div>
+    <!-- 2. CLICKER -->
+    <div class="fidget-card" id="card-clicker">
+      <div class="card-label">CLICKER</div>
+      <div class="clicker-wrap">
+        <div class="clicker-btn" id="clickerBtn">
+          <div class="clicker-face">
+            <div class="clicker-ridge"></div>
+            <div class="clicker-ridge"></div>
+            <div class="clicker-ridge"></div>
+          </div>
+        </div>
+        <div class="clicker-shadow"></div>
+      </div>
+      <div class="clicker-count" id="clickerCount">
+        <span class="count-digit" id="countDigit">0</span>
+      </div>
     </div>
 
-    <div class="fidget-card locked" id="card-3">
-      <div class="lock-icon">🔒</div>
-      <div class="card-label">???</div>
-      <div class="unlock-hint">50 clicks to unlock</div>
+    <!-- 3. SQUEEZE BALL -->
+    <div class="fidget-card" id="card-squeeze">
+      <div class="card-label">SQUEEZE</div>
+      <div class="squeeze-wrap">
+        <div class="squeeze-ball" id="squeezeBall">
+          <div class="squeeze-shine"></div>
+          <div class="squeeze-gloss"></div>
+        </div>
+        <div class="squeeze-shadow" id="squeezeShadow"></div>
+      </div>
+      <div class="squeeze-hint">hold to squeeze</div>
     </div>
 
-    <div class="fidget-card locked" id="card-4">
-      <div class="lock-icon">🔒</div>
-      <div class="card-label">???</div>
-      <div class="unlock-hint">100 clicks to unlock</div>
+    <!-- 4. DIAL -->
+    <div class="fidget-card" id="card-dial">
+      <div class="card-label">DIAL</div>
+      <div class="dial-housing">
+        <div class="dial-marks">
+          <div class="dial-mark" style="--a:0deg"></div>
+          <div class="dial-mark" style="--a:30deg"></div>
+          <div class="dial-mark" style="--a:60deg"></div>
+          <div class="dial-mark" style="--a:90deg"></div>
+          <div class="dial-mark" style="--a:120deg"></div>
+          <div class="dial-mark" style="--a:150deg"></div>
+          <div class="dial-mark" style="--a:180deg"></div>
+          <div class="dial-mark" style="--a:210deg"></div>
+          <div class="dial-mark" style="--a:240deg"></div>
+          <div class="dial-mark" style="--a:270deg"></div>
+          <div class="dial-mark" style="--a:300deg"></div>
+          <div class="dial-mark" style="--a:330deg"></div>
+        </div>
+        <div class="dial-knob" id="dialKnob">
+          <div class="dial-face">
+            <div class="dial-indicator"></div>
+            <div class="dial-grip"></div>
+            <div class="dial-grip"></div>
+            <div class="dial-grip"></div>
+            <div class="dial-grip"></div>
+            <div class="dial-grip"></div>
+          </div>
+        </div>
+      </div>
+      <div class="dial-value" id="dialValue">0°</div>
+    </div>
+
+    <!-- 5. SLIDER -->
+    <div class="fidget-card" id="card-slider">
+      <div class="card-label">SLIDER</div>
+      <div class="slider-housing">
+        <div class="slider-track-wrap">
+          <div class="slider-track" id="sliderTrack">
+            <div class="slider-fill" id="sliderFill"></div>
+            <div class="slider-notches">
+              <div class="slider-notch"></div>
+              <div class="slider-notch"></div>
+              <div class="slider-notch"></div>
+              <div class="slider-notch"></div>
+              <div class="slider-notch"></div>
+              <div class="slider-notch"></div>
+              <div class="slider-notch"></div>
+              <div class="slider-notch"></div>
+              <div class="slider-notch"></div>
+              <div class="slider-notch"></div>
+              <div class="slider-notch"></div>
+            </div>
+            <div class="slider-thumb" id="sliderThumb">
+              <div class="slider-thumb-face">
+                <div class="slider-thumb-line"></div>
+                <div class="slider-thumb-line"></div>
+                <div class="slider-thumb-line"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slider-labels">
+          <span>0</span><span>50</span><span>100</span>
+        </div>
+      </div>
+      <div class="slider-value" id="sliderValue">50</div>
     </div>
 
   </main>
-
   <script src="fidget.js"></script>
 </body>
 </html>
